@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=3 uid="uid://dweysabrm1tuy"]
+
+[ext_resource type="PackedScene" uid="uid://l2wg5dja8drj" path="res://player.tscn" id="1_jq2vj"]
+[ext_resource type="Script" path="res://survivors_game.gd" id="1_kuh1x"]
+[ext_resource type="PackedScene" uid="uid://q3sblypworvj" path="res://pine_tree.tscn" id="3_thl4f"]
+[ext_resource type="PackedScene" uid="uid://0wqmkx4e4e41" path="res://mushrooms.tscn" id="4_ctti4"]
+
+[sub_resource type="Curve2D" id="Curve2D_v1bx2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -129, -128, 0, 0, 0, 0, 2047, -144, 0, 0, 0, 0, 2039, 1208, 0, 0, 0, 0, -130.997, 1213.33, 0, 0, 0, 0, -129, -128, 0, 0, 0, 0, -129, -128)
+}
+point_count = 6
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(1, 0)
+script = ExtResource("1_kuh1x")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1.0
+offset_right = 1922.0
+offset_bottom = 1058.0
+color = Color(0.0470588, 0.0745098, 0.0901961, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_jq2vj")]
+position = Vector2(655, 488)
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-896, -680)
+scale = Vector2(1.21947, 1.34971)
+curve = SubResource("Curve2D_v1bx2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-129, -128)
+rotation = -0.00735281
+
+[node name="PineTree" parent="." instance=ExtResource("3_thl4f")]
+position = Vector2(1175, 397)
+
+[node name="PineTree2" parent="." instance=ExtResource("3_thl4f")]
+position = Vector2(123, 346)
+
+[node name="PineTree3" parent="." instance=ExtResource("3_thl4f")]
+position = Vector2(974, 677)
+
+[node name="Mushrooms" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(326, 846)
+
+[node name="Mushrooms2" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(1149, 753)
+
+[node name="Mushrooms3" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(236, 487)
+
+[node name="Mushrooms4" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(1022, 205)
+
+[node name="Mushrooms5" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(1506, 631)
+
+[node name="Mushrooms6" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(777, 765)
+region_rect = Rect2(128, 616, 32, 24)
+
+[node name="Mushrooms7" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(804, 204)
+region_rect = Rect2(64, 608, 32, 32)
+
+[node name="Mushrooms8" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(297, 94)
+region_rect = Rect2(128, 616, 32, 24)
+
+[node name="Mushrooms9" parent="." instance=ExtResource("4_ctti4")]
+position = Vector2(1372, 482)
+region_rect = Rect2(128, 616, 32, 24)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "GAME OVER"
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

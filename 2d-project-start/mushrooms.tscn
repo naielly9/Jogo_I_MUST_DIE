@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://0wqmkx4e4e41"]
+
+[ext_resource type="Texture2D" uid="uid://cx0q6sqdebewg" path="res://assets/tiles.png" id="1_e6ils"]
+
+[node name="Mushrooms" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_e6ils")
+region_enabled = true
+region_rect = Rect2(32, 648, 32, 24)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://rfy6k2u8kaso"]
+
+[ext_resource type="Script" path="res://gun.gd" id="1_50d12"]
+[ext_resource type="Texture2D" uid="uid://cu5l28mwl5e51" path="res://assets/items.png" id="2_ie651"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b48ai"]
+radius = 495.956
+
+[node name="Gun" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_50d12")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b48ai")
+
+[node name="WeaponPivot" type="Marker2D" parent="."]
+
+[node name="Pistol" type="Sprite2D" parent="WeaponPivot"]
+texture_filter = 1
+position = Vector2(100, 0)
+rotation = -0.392699
+scale = Vector2(4, 4)
+texture = ExtResource("2_ie651")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(64, 320, 32, 32)
+
+[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Pistol"]
+unique_name_in_owner = true
+position = Vector2(7.367, -8.69695)
+scale = Vector2(1.00187, 1.00089)
+skew = 0.0122435
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
